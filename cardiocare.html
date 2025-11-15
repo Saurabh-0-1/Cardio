@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiocare - Heart Disease Risk Predictor</title>
+    <link rel="stylesheet" href="cardio.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>
+                <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                Cardio-Care
+            </h1>
+            <p>AI-Powered Heart Disease Risk Assessment &amp; Prevention</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>Patient Information</h2>
+                <form id="heartForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="age">Age (years)</label>
+                            <input type="number" class="form-control" id="age" min="1" max="120" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="sex">Sex</label>
+                            <select class="form-control" id="sex" required>
+                                <option value="">Select...</option>
+                                <option value="1">Male</option>
+                                <option value="0">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="cp">Chest Pain Type</label>
+                        <select class="form-control" id="cp" required>
+                            <option value="">Select...</option>
+                            <option value="0">No Pain(Asymptomatic)</option>
+                            <option value="1"> Mild pressure(Atypical Angina)</option>
+                            <option value="2">Occasional chest pain(Non-Anginal Pain)</option>
+                            <option value="3"> Pain during physical activity(Typical Angina)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="trestbps"> Blood Pressure (mm Hg)</label>
+                            <input type="number" class="form-control" id="trestbps" min="80" max="200" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="chol">Cholesterol (mg/dl)</label>
+                            <input type="number" class="form-control" id="chol" min="100" max="600" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="fbs">Fasting Blood Sugar &gt; 120 mg/dl</label>
+                        <select class="form-control" id="fbs" required>
+                            <option value="">Select...</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="restecg">Resting ECG Results</label>
+                        <select class="form-control" id="restecg" required>
+                            <option value="">Select...</option>
+                            <option value="0">Normal(normal functionality)</option>
+                            <option value="1">ST-T Wave Abnormality(Mildly bad)</option>
+                            <option value="2">Left Ventricular Hypertrophy(left ventricle enlarged/thicker)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="thalach">Maximum Heart Rate Achieved</label>
+                            <input type="number" class="form-control" id="thalach" min="60" max="220" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="exang">Exercise Induced Angina</label>
+                            <select class="form-control" id="exang" required>
+                                <option value="">Select...</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="oldpeak">Oldpeak (ST Depression)</label>
+                            <input type="number" class="form-control" id="oldpeak" min="0" max="10" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="slope">Slope of Peak Exercise ST Segment</label>
+                            <select class="form-control" id="slope" required>
+                                <option value="">Select...</option>
+                                <option value="0">Downsloping</option>
+                                <option value="1">Flat</option>
+                                <option value="2">Upsloping</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="ca">Number of Major Vessels (0-3)</label>
+                            <select class="form-control" id="ca" required>
+                                <option value="">Select...</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="thal">Thalassemia Type</label>
+                            <select class="form-control" id="thal" required>
+                                <option value="">Select...</option>
+                                <option value="1">Normal</option>
+                                <option value="2">Fixed Defect</option>
+                                <option value="3">Reversible Defect</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Predict Heart Disease Risk</button>
+                </form>
+            </div>
+
+            <div class="card results-container" id="resultsCard">
+                <h2>Risk Assessment Results</h2>
+
+                <div class="risk-score" id="riskScore">
+                    <div class="risk-percentage" id="riskPercentage">0%</div>
+                    <div class="risk-label" id="riskLabel">Calculating...</div>
+                </div>
+
+                <div class="tips-section" id="tipsSection">
+                    <!-- Tips will be dynamically inserted here -->
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">Your Health Parameters vs. Healthy Range</div>
+                    <div id="chartBars">
+                        <!-- Chart bars will be dynamically inserted here -->
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="resetForm()">New Assessment</button>
+                    <button class="btn btn-primary" onclick="downloadReport()">Download Report (PDF)</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Disclaimer:</strong> This tool provides an educational risk assessment based on medical
+                parameters. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always
+                consult with a qualified healthcare provider regarding your heart health.</p>
+        </footer>
+    </div>
+
+    <script src="cardio.js"></script>
+
+</body>
+
+</html>
